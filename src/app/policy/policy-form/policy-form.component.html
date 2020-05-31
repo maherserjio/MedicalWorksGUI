@@ -1,0 +1,67 @@
+<div class="u-margin-top-md">
+  <form  [formGroup]="policyForm" (ngSubmit)="onSubmit()" fxLayout="row" fxLayoutAlign="space-around" >
+    <div fxLayout="column" fxFlex="30%">
+
+      <h2>{{title}}</h2>
+
+      <ng-container *ngIf="editMode">
+        <mat-form-field class="example-full-width">
+          <mat-label>Police Number</mat-label>
+          <input formControlName="police_No" matInput readonly value="Police Number Goes Here">
+        </mat-form-field>
+      </ng-container>
+
+
+      <mat-form-field class="u-margin-bot-sm">
+        <mat-label>Effective</mat-label>
+        <input formControlName="effective" matInput [matDatepicker]="effective" placeholder="Effective date">
+        <mat-datepicker-toggle matSuffix [for]="effective"></mat-datepicker-toggle>
+        <mat-datepicker #effective></mat-datepicker>
+        <mat-error *ngIf="policyForm.get('effective').hasError('required')">
+          effective date is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="u-margin-bot-sm">
+        <mat-label>Expiry</mat-label>
+        <input formControlName="expiry" matInput [matDatepicker]="expiry" placeholder="Expiry date">
+        <mat-datepicker-toggle matSuffix [for]="expiry"></mat-datepicker-toggle>
+        <mat-datepicker #expiry></mat-datepicker>
+        <mat-error *ngIf="policyForm.get('expiry').hasError('required')">
+          expiry date is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <button [disabled]="policyForm.invalid || policyForm.controls.beneficiaries.value.length === 0"
+              mat-raised-button
+              class="u-margin-top-md"
+              color="primary">
+              {{title}}
+      </button>
+
+    </div>
+    <!-- Beneficiaries Column -->
+    <div fxLayout="column" fxFlex="30%">
+
+      <button type="button"
+       
+              (click)="addBeneficiary()"
+              mat-raised-button class="u-margin-bot-md "
+              color="primary">
+              Add Beneficiary
+      </button>
+
+      <app-beneficiary-form
+               *ngFor="let beneficiary of beneficiaries?.controls; let i= index"
+               [index]="i" [beneficiaryForm]="beneficiary"
+               (deleteBeneficiary)="deleteBeneficiary($event)">
+      </app-beneficiary-form>
+
+
+      
+    </div>
+  
+   </form>
+
+
+</div>

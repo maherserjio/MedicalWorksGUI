@@ -1,0 +1,74 @@
+<!--
+Policy no (textfield – should have a validator which verifies
+that the input value is a valid policy# No in the database once the field loses focus)
+-->
+
+<div class="u-margin-top-md">
+
+  <form [formGroup]="ClaimForm" (ngSubmit)="onSubmit()" fxLayout="row" fxLayoutAlign="space-around">
+
+    <div fxLayout="column" fxFlex="30%">
+
+      <h2>{{title}}</h2>
+    <!--  [errorStateMatcher]="matcher"-->
+
+      <mat-form-field class="example-full-width u-margin-bot-sm">
+        <mat-label>Police Number</mat-label>
+        <input  formControlName="police_No" matInput>
+        <mat-error *ngIf="ClaimForm.get('police_No').hasError('InValidPolicyNo')
+                   && !ClaimForm.get('police_No').hasError('required')">
+          Please enter a valid Police Number
+        </mat-error>
+        <mat-error *ngIf="ClaimForm.get('police_No').hasError('required')">
+          Police is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+      <!--<div *ngIf="ClaimForm.errors?.InValidPolicyNo
+       && (ClaimForm.touched || ClaimForm.dirty)">
+    InValidPolicyNo
+  </div>-->
+
+      <mat-form-field class="u-margin-bot-sm">
+        <mat-label>Incurred Date</mat-label>
+        <input formControlName="Incured_Date" matInput [matDatepicker]="Incured_Date" placeholder="incurred date">
+        <mat-datepicker-toggle matSuffix [for]="Incured_Date"></mat-datepicker-toggle>
+        <mat-datepicker #Incured_Date></mat-datepicker>
+        <mat-error *ngIf="ClaimForm.get('Incured_Date').hasError('required')">
+          Incured Date is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Claimed Amount</mat-label>
+        <input 
+               type="number"
+               required
+               step="1"
+               restrict-input
+               min="1"
+               formControlName="Claimed_Amount" matInput>
+        <mat-error *ngIf="ClaimForm.get('Claimed_Amount').hasError('required')">
+          Claimed Amount is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="ClaimForm.get('Claimed_Amount').hasError('InValidClaimedAmount')
+                   && !ClaimForm.get('Claimed_Amount').hasError('required')">
+          Please enter a valid Claimed Amount 
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button
+              class="u-margin-top-md"
+              color="primary">
+        {{title}}
+      </button>
+
+    </div>
+
+
+
+  </form>
+
+
+</div>

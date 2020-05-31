@@ -1,1 +1,67 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/*Modal Styles */
+mat-dialog-container {
+  padding: 0px !important;
+  border-radius: 11px;
+  background-color: #1a1a1a;
+}
+
+  mat-dialog-container mat-card {
+      width: 30vw;
+  }
+
+
+/*Utilities*/
+
+
+.u-margin-top-sm {
+  margin-top: 1rem !important;
+}
+
+.u-margin-right-sm {
+  margin-right: 1rem !important;
+}
+
+.u-margin-left-sm {
+  margin-left: 1rem !important;
+}
+
+.u-margin-bot-sm {
+  margin-bottom: 1rem !important;
+}
+
+.u-margin-top-md {
+  margin-top: 2rem !important;
+}
+
+.u-margin-right-md {
+  margin-right: 2rem !important;
+}
+
+.u-margin-left-md {
+  margin-left: 2rem !important;
+}
+
+.u-margin-bot-md {
+  margin-bottom: 2rem !important;
+}
+
+.u-margin-top-lg {
+  margin-top: 4rem !important;
+}
+
+.u-margin-right-lg {
+  margin-right: 4rem !important;
+}
+
+.u-margin-left-lg {
+  margin-left: 4rem !important;
+}
+
+.u-margin-bot-lg{
+  margin-bottom: 4rem !important;
+}

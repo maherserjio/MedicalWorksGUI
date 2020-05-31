@@ -1,0 +1,110 @@
+  <div fxLayout="column" fxFlex="100%">
+  <!--Search Filter-->
+  <div fxLayout="row" fxFlex="100%" fxLayoutAlign="center center">
+    <form [formGroup]="SearchForm" (ngSubmit)="onSubmit()" fxLayout="row" class="u-margin-top-sm">
+
+      <mat-form-field class="u-margin-right-md ">
+        <mat-label>Claimed Amount From</mat-label>
+        <input type="number"
+               formControlName="Claimed_Amount_From"
+               step="1"
+               restrict-input
+               min="1"
+               matInput>
+        <mat-error *ngIf="SearchForm.get('Claimed_Amount_From').hasError('InValidClaimedAmount')
+                   && !SearchForm.get('Claimed_Amount_From').hasError('required')">
+          Please enter a valid Claimed Amount
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="u-margin-right-md">
+        <mat-label>Claimed Amount To</mat-label>
+        <input type="number"
+               formControlName="Claimed_Amount_To"
+               step="1"
+               restrict-input
+               min="2"
+               matInput>
+        <mat-error *ngIf="SearchForm.get('Claimed_Amount_To').hasError('InValidClaimedAmount')
+                   && !SearchForm.get('Claimed_Amount_To').hasError('required')">
+          Please enter a valid Claimed Amount
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="u-margin-right-md">
+        <mat-label>Police Number</mat-label>
+        <input formControlName="police_No" matInput>
+        <mat-error *ngIf="SearchForm.get('police_No').hasError('InValidPolicyNo')
+                   && !SearchForm.get('police_No').hasError('required')">
+          Please enter a valid Police Number
+        </mat-error>
+      </mat-form-field>
+
+
+      <button type="submit" color="primary" mat-fab>
+        <mat-icon>search</mat-icon>
+      </button>
+
+
+    </form>
+  </div>
+
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="policyNo">
+      <th mat-header-cell *matHeaderCellDef> policyNo </th>
+      <td mat-cell *matCellDef="let element"> {{element.police_No}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="incuredDate">
+      <th mat-header-cell *matHeaderCellDef> incuredDate </th>
+      <td mat-cell *matCellDef="let element"> {{element.incured_Date | date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ClaimedAmount">
+      <th mat-header-cell *matHeaderCellDef> ClaimedAmount </th>
+      <td mat-cell *matCellDef="let element"> {{element.claimed_Amount}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef> Update </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="accent" (click)="redirectToUpdate(element.id)">
+          <mat-icon class="mat-18">system_update</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="warn" (click)="redirectToDelete(element.id)">
+          <mat-icon class="mat-18">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <button (click)="onSubmitClaim()"
+            mat-raised-button
+            fxFlex="25%"
+            class="u-margin-bot-md u-margin-top-md"
+            color="primary">
+      Submit Claim
+    </button>
+  </div>
+
+
+</div>
+
+

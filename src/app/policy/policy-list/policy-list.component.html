@@ -1,0 +1,68 @@
+  <!--effective: Date
+  expiry: Date
+  id: string
+  isValid: boolean
+  police_No: string
+  premium: number-->
+
+  <div fxLayout="column" fxFlex="100%">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> id </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="police_No">
+        <th mat-header-cell *matHeaderCellDef> policyNo </th>
+        <td mat-cell *matCellDef="let element"> {{element.police_No}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="effective">
+        <th mat-header-cell *matHeaderCellDef> effective </th>
+        <td mat-cell *matCellDef="let element"> {{element.effective | date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expiry">
+        <th mat-header-cell *matHeaderCellDef> expiry </th>
+        <td mat-cell *matCellDef="let element"> {{element.expiry | date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="premium">
+        <th mat-header-cell *matHeaderCellDef> premium </th>
+        <td mat-cell *matCellDef="let element"> {{element.premium}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="isValid">
+        <th mat-header-cell *matHeaderCellDef> isValid </th>
+        <td mat-cell *matCellDef="let element"> {{element.isValid}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="update">
+        <th mat-header-cell *matHeaderCellDef> Update </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="accent" (click)="redirectToUpdate(element.id)">
+            <mat-icon class="mat-18">system_update</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button (click)="onSubmitPolicy()"
+              mat-raised-button
+              fxFlex="25%"
+              class="u-margin-bot-md u-margin-top-md"
+              color="primary">
+        Submit Policy
+      </button>
+    </div>
+      
+  </div>
+
+

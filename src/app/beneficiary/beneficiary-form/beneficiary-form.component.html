@@ -1,0 +1,53 @@
+<form [formGroup]="beneficiaryForm" fxLayout="column">
+
+  <button type="button"
+          (click)="delete()"
+          mat-raised-button class="u-margin-bot-md"
+          color="warn">
+    Delete
+  </button>
+
+  <mat-form-field class="u-margin-bot-sm">
+    <mat-label>Beneficiary Name</mat-label>
+    <input formControlName="name" matInput value="Beneficiary Name">
+    <mat-error *ngIf="beneficiaryForm.get('name').hasError('required')">
+      name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="u-margin-bot-sm">
+    <mat-label>Relationship</mat-label>
+    <mat-select formControlName="relationshipId" placeholder="Relationship"
+                [(value)]="SelectedRelationshipId">
+      <mat-option *ngFor="let Relationship of Relationships | async"
+                  value={{Relationship.id}}>
+        {{Relationship.type}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="beneficiaryForm.get('relationshipId').hasError('required')">
+      relationship is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-label>Gender</mat-label>
+  <mat-radio-group class="u-margin-bot-sm" formControlName="genderId" [(value)]="SelectedGenderId">
+    <mat-radio-button *ngFor="let Gender of Genders | async"
+                      value={{Gender.id}} color="primary" class="u-margin-right-sm">
+      {{Gender.type}}
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <mat-form-field class="u-margin-bot-md">
+    <mat-label>Date of Birth</mat-label>
+    <input formControlName="date_Of_Birth" matInput [matDatepicker]="date_Of_Birth" placeholder="Date of Birth">
+    <mat-datepicker-toggle matSuffix [for]="date_Of_Birth"></mat-datepicker-toggle>
+    <mat-datepicker #date_Of_Birth></mat-datepicker>
+    <mat-error *ngIf="beneficiaryForm.get('date_Of_Birth').hasError('required')">
+      date Of birth is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+
+
+</form>
+  
